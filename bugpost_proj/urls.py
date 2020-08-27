@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from bugpostapp import views
+
 urlpatterns = [
+    path('', views.index, name='homepage'),
+    path('login/', views.login_view, name='loginview'),
+    path('logout/', views.logout_view, name="logoutview"),
     path('admin/', admin.site.urls),
 ]
