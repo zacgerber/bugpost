@@ -9,4 +9,4 @@ class LoginForm(forms.ModelForm):
 
     class Meta:
         model = models.MyUser
-        fields = ['displayname']
+        fields = ['username']

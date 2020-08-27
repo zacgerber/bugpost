@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import authenticate, login, logout
 
-from bugpostapp.models import MyUser
+# from bugpostapp.models import MyUser
 from bugpostapp.forms import LoginForm
-from django.conf import settings
+# from django.conf import settings
 
 
 def index(request):
