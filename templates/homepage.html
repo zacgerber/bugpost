@@ -1,6 +1,9 @@
+<a href="/"><input class="Home" type="Submit" value="Homepage"></a>
+<a href="/create_ticket_view/"><input class="CreateTicket" type="Submit" value="Ticket Submit"></a>
+
 <h1>Homepage</h1>
 {%if request.user.is_authenticated %}
-    <h2>Welcome, {{ request.user.username }}, Actual name: {{ request.user.displayname }}!</h2>
+    <h2>Welcome, {{ request.user.username }}!</h2>
     <p>
         <a href="/logout/"><button>Logout</button></a>
     </p>
@@ -10,3 +13,44 @@
         <a href="/login/"><button>Login</button></a>
     </p>
 {%endif%}
+<div>
+    <h1>New Ticket</h1>
+    {% for ticket in my_ticket reversed %}
+    <ol>
+        <li>
+        {% if ticket.ticket_status == 'N' %}
+        <a href="/ticket_detail/{{ ticket.id}}">{{ ticket.title }}</a>
+        Reported By: <a href="/user_detail_view/{{ ticket.user.id }}">{{  ticket.user }}</a>
+        {% endif %}
+        </li>
+    </ol>
+    {% endfor %}
+</div>
+<br>
+<br>
+<div>
+    <h1>In Process Ticket</h1>
+    {% for ticket in my_ticket reversed %}
+    <ol>
+        {% if ticket.ticket_status == 'INP' %}
+        <a href="/ticket_detail/{{ ticket.id}}">{{ ticket.title }}</a>
+        Assigned To: <a href="/user_detail_view/{{ ticket.user.id }}">{{  ticket.user }}</a>
+        <br>
+        Reported By: <a href="/user_detail_view/{{ ticket.user.id }}">{{  ticket.user }}</a>
+        {% endif %}
+    </ol>
+    {% endfor %}
+</div>
+<br>
+<br>
+<div>
+    <h1>Done Ticket</h1>
+    {% for ticket in my_ticket %}
+    <ol>
+        {% if ticket.ticket_status == 'D' %}
+        <a href="/ticket_detail/{{ ticket.id}}">{{ ticket.title }}</a>
+        Reported By: <a href="/user_detail_view/{{ ticket.user.id }}">{{  ticket.user }}</a>
+        {% endif %}
+    </ol>
+    {% endfor %}
+</div>

@@ -16,11 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from bugpostapp import views
-
+from bugpostapp.views import login_view, logout_view
+from homepage import views
 urlpatterns = [
     path('', views.index, name='homepage'),
-    path('login/', views.login_view, name='loginview'),
-    path('logout/', views.logout_view, name="logoutview"),
+    path('create_ticket_view/', views.create_ticket_view),
+    path('ticket/<int:ticket_id>/edit/', views.ticket_edit_view),
+    path('ticket/<int:ticket_id>/', views.ticket_detail_view),
+    path('in_progress_ticket_view/<int:ticket_id>/', views.in_progress_ticket_view),
+    path('completed_ticket_view/<int:ticket_id>/', views.completed_ticket_view),
+    path('invalid_ticket_view/<int:ticket_id>/', views.invalid_ticket_view),
+    path('user_detail_view/<int:ticket_id>/', views.user_detail_view),
+    path('login/', login_view, name='loginview'),
+    path('logout/', logout_view, name="logoutview"),
     path('admin/', admin.site.urls),
 ]
