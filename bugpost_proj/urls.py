@@ -18,16 +18,17 @@ from django.urls import path
 
 from bugpostapp.views import login_view, logout_view
 from homepage import views
+
 urlpatterns = [
     path('', views.index, name='homepage'),
-    path('create_ticket_view/', views.create_ticket_view),
+    path('create_ticket_view/', views.create_ticket_view, name='create_ticket'),
     path('ticket/<int:ticket_id>/edit/', views.ticket_edit_view),
-    path('ticket/<int:ticket_id>/', views.ticket_detail_view),
-    path('in_progress_ticket_view/<int:ticket_id>/', views.in_progress_ticket_view),
-    path('completed_ticket_view/<int:ticket_id>/', views.completed_ticket_view),
-    path('invalid_ticket_view/<int:ticket_id>/', views.invalid_ticket_view),
-    path('user_detail_view/<int:ticket_id>/', views.user_detail_view),
-    path('login/', login_view, name='loginview'),
-    path('logout/', logout_view, name="logoutview"),
+    path('ticket_detail_view/<int:ticket_id>/', views.ticket_detail_view, name='ticket_detail'),
+    path('in_progress_ticket_view/<int:ticket_id>/', views.in_progress_ticket_view, name='in_progress_ticket'),
+    path('completed_ticket_view/<int:ticket_id>/', views.completed_ticket_view, name='completed_ticket'),
+    path('invalid_ticket_view/<int:ticket_id>/', views.invalid_ticket_view, name='invalid_ticket'),
+    path('user_detail_view/<int:ticket_id>/', views.user_detail_view, name='user_detail'),
+    path('login_view/', login_view, name='loginview'),
+    path('logout_view/', logout_view, name="logoutview"),
     path('admin/', admin.site.urls),
 ]

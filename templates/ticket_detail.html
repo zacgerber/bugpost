@@ -1,18 +1,19 @@
-<div class="container">
-    {% if not post %}
-        <h1>The post you are looking for does not exist!</h1>
-    {% else %}
-        <h2>{{ post.title }}</h2>
-        <li>
-        <a href='/author/{{ post.author.id }}/'>{{ post.author }}</a>
-        </li>
-        <p>{{ post.body }}</p>
-        <li>
-        <p>{{ post.instructions }}</p>
-        <h4>{{ post.time_required }}</h4>
-    {% endif %}
-    <a href="/"><input
-           type="button"
-           value="homepage">
-    </a>
+<div>
+<a href="/"><input class="homeButton" type="submit" value="Homepage"></a>
+
+    <a class="dropdown-item" href="/ticket/{{ ticket.id }}/edit/">Edit</a>
+    <a class="dropdown-item" href="/in_progress_ticket_view/{{ ticket.id }}/">Assigned Ticket to you</a>
+    <a class="dropdown-item" href="/completed_ticket_view/{{ ticket.id }}/">Completed Ticket</a>
+    <a class="dropdown-item" href="/invalid_ticket_view/{{ ticket.id }}/">Invalid Ticket</a>
+</div>
+
+<div>
+    <h2>{{ ticket.title }}</h2>
+    <h3>Ticket Info:</h3>
+    <h4>Status:</h4> {{ ticket.ticket_status }}
+    <h4>Date Submitted: </h4> {{ ticket.filed_date }}
+    <h4>Description: </h4> {{ ticket.description }}
+    <h4>Reported By: </h4> <a href="/user_detail_view/{{ ticket.user_filed.id}}">{{ ticket.user_filed }}</a>
+    <h4>Assigned To: </h4> <a href="/user_detail_view/{{ ticket.user_assigned.id}}">{{ ticket.user_assigned }}</a>
+    <h4>Completed By: </h4> <a href="/user_detail_view/{{ ticket.user_completed.id}}">{{ ticket.user_completed }}</a>
 </div>

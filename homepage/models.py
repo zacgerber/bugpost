@@ -6,27 +6,28 @@ from bugpostapp.models import MyUser
 
 
 class Ticket(models.Model):
-    n = 'N'
-    ip = 'IP'
-    invalid = 'INV'
-    d = 'D'
+    objects = None
+    N = 'N'
+    IP = 'IP'
+    Invalid = 'INV'
+    D = 'D'
     status_choices = [
-        (n, 'new'),
-        (ip, 'in_progress'),
-        (d, 'done'),
-        (invalid, 'invalid'),
+        (N, 'New'),
+        (IP, 'In_Progress'),
+        (D, 'Done'),
+        (Invalid, 'Invalid'),
     ]
     title = models.CharField(max_length=50)
     filed_date = models.DateTimeField(default=timezone.now)
     description = models.TextField()
-    user_filed = models.ForeignKey(MyUser, related_name="user_filed", on_delete=models.CASCADE)
+    user_filed = models.ForeignKey(MyUser, related_name="user_filed", null=True, on_delete=models.CASCADE)
     ticket_status = models.CharField(
         max_length=3,
         choices=status_choices,
-        default=n,
+        default=N,
     )
-    user_assigned = models.ForeignKey(MyUser, related_name="user_assigned", on_delete=models.CASCADE)
-    user_completed = models.ForeignKey(MyUser, related_name="user_completed", on_delete=models.CASCADE)
+    user_assigned = models.ForeignKey(MyUser, related_name="user_assigned", null=True, on_delete=models.CASCADE)
+    user_completed = models.ForeignKey(MyUser, related_name="user_completed", null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.description
